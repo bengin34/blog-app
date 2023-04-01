@@ -16,7 +16,7 @@ const Register = () => {
   const {register} = useAuthCall()
   
   return (
-    <Container>
+    <Container maxWidth='lg'>
       <Grid
         container
         justifyContent="center"
@@ -57,7 +57,6 @@ const Register = () => {
               image: "",
               bio: "",
               password: "",
-              password2: "",
             }}
 
             validationSchema={registerSchema}
@@ -72,10 +71,13 @@ const Register = () => {
           >
        
           </Formik>
-          <Box  >
+          <Box sx={{textAlign:"center", mt:3}} >
             <Link to="/"> Do you have account? </Link>
           </Box>
         </Grid>
+      <Grid  display='flex' justifyContent="center" alignItems='center' item xs={12} sm={12} md={6}>
+          <img width="400px"  height="400px"  src={image} alt="img" />
+      </Grid>
       </Grid>
     </Container>
   );

@@ -69,7 +69,7 @@ const {login} = useAuthCall()
         </Box>
       </Grid>
 
-      <Grid display='flex' justifyContent="center" alignItems='center' item xs={12} sm={12} md={6}>
+      <Grid display='flex' justifyContent="center" alignItems='flex-start' item xs={12} sm={12} md={6}>
           <img width="400px"  height="400px"  src={image} alt="img" />
       </Grid>
     </Grid>
