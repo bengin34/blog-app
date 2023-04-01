@@ -9,9 +9,11 @@ import image from  "../helper/background.jpg"
 import { Link } from "react-router-dom"
 import { Formik } from "formik"
 import LoginForm, { loginScheme } from "../components/LoginForm"
+import useAuthCall from '../hooks/useAuthCall'
 
 const Login = () => {
-
+  
+const {login} = useAuthCall()
     
 
   return (
@@ -67,10 +69,8 @@ const Login = () => {
         </Box>
       </Grid>
 
-      <Grid item xs={10} sm={12} md={6}>
-        <Container justifyContent="center" >
-          <img width="400px" height="300px" src={image} alt="img" />
-        </Container>
+      <Grid display='flex' justifyContent="center" alignItems='center' item xs={12} sm={12} md={6}>
+          <img width="400px"  height="400px"  src={image} alt="img" />
       </Grid>
     </Grid>
   </Container>
