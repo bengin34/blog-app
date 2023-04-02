@@ -1,22 +1,27 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import BlogCard from "../components/BlogCard";
 import Navbar from "../components/Navbar";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRouter from "./PrivateRouter";
 
+
 const AppRouter = () => {
+  const { currentUser } = useSelector((state) => state.auth);
+  
   return (
     <BrowserRouter>
-     <Navbar />        
+     {currentUser && <Navbar /> } 
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<PrivateRouter />}>
-          <Route path="/" element={<Dashboard />}>
-
-          </Route>
+          <Route path="dashboard"  element={<Dashboard />}/>
+          
+     
         </Route>
       </Routes>
     </BrowserRouter>
