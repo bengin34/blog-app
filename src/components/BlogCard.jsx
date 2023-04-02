@@ -38,7 +38,7 @@ export const BlogCard = () => {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+            BE
           </Avatar>
         }
         action={
