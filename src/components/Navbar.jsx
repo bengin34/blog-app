@@ -1,32 +1,49 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import MenuIcon from '@mui/icons-material/Menu';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
-import AdbIcon from '@mui/icons-material/Adb';
+import * as React from "react";
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import MenuIcon from "@mui/icons-material/Menu";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
+import AdbIcon from "@mui/icons-material/Adb";
+import { useNavigate } from "react-router-dom";
 
-const pages = ['Dashboard', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Logout'];
+const pages = [
+  {
+    title: "Dashboard",
+    url: "/dashboard",
+  },
+  {
+    title: "Categories",
+    url: "/categories",
+  },
 
-const Navbar =()  => {
+];
+const settings = [
+  {
+    title: "Profile",
+    url: "/profile",
+  },
+  {
+    title: "Account",
+    url: "/categories",
+  },
+  {
+    title: "Logout",
+    url: "/",
+  },
+  ];
+
+const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+const navigate = useNavigate()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,18 +54,21 @@ const Navbar =()  => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+    
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    
+    
+
   };
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -63,28 +83,28 @@ const Navbar =()  => {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page} onClick={() => (navigate(page.url),handleCloseNavMenu())}>
+                  <Typography textAlign="center">{page.title}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-         
+
           <Typography
             variant="h5"
             noWrap
@@ -92,25 +112,25 @@ const Navbar =()  => {
             href=""
             sx={{
               mr: 2,
-              display: { xs: 'flex' },
+              display: { xs: "flex" },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             Tech Blog
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                onClick={() => (navigate(page.url),handleCloseNavMenu())}
+                sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                {page.title}
               </Button>
             ))}
           </Box>
@@ -122,24 +142,24 @@ const Navbar =()  => {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" >{setting}</Typography>
+                <MenuItem key={setting} onClick={() => (navigate(setting.url),handleCloseUserMenu())}>
+                  <Typography textAlign="center">{setting.title}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -148,5 +168,5 @@ const Navbar =()  => {
       </Container>
     </AppBar>
   );
-}
+};
 export default Navbar;

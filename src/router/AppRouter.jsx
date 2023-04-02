@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BlogCard from "../components/BlogCard";
 import Navbar from "../components/Navbar";
+import Authors from "../pages/Authors";
+import Categories from "../pages/Categories";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
@@ -20,6 +22,8 @@ const AppRouter = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<PrivateRouter />}>
           <Route path="dashboard"  element={<Dashboard />}/>
+          <Route path="authors"  element={<Authors />}/>
+          <Route path="categories"  element={<Categories />}/>
           
      
         </Route>
