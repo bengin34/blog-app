@@ -6,7 +6,7 @@ import useAxios from "./useAxios";
 const useBlogCall = () => {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
-  const {axiosWithToken} = useAxios()
+  const {axiosWithToken, getNews} = useAxios()
 
   const getBlogData = async (url) => {
   
@@ -22,6 +22,21 @@ const useBlogCall = () => {
       dispatch(fetchFail());
     }
   };
+  const getNewsData = async (url) => {
+  
+    dispatch(fetchStart());
+
+    try {
+      // const { data } = await axios(`${BASE_URL}api/${url}/`, {
+      //   headers: { Authorization: `Token ${token}` },
+      // });
+      const {data} = await getNews.get()
+      console.log(data.news.news)
+      // dispatch(getSuccess({ data, url }));
+    } catch (error) {
+      dispatch(fetchFail());
+    }
+  };
 
   const deleteBlogData = async (url, id) => {
 
@@ -33,7 +48,7 @@ const useBlogCall = () => {
       dispatch(fetchFail());
     }
   };
-  return { getBlogData, deleteBlogData };
+  return { getBlogData, deleteBlogData,getNewsData };
 };
 
 export default useBlogCall;
