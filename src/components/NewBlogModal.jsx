@@ -28,7 +28,7 @@ const [blog,setBlog] = useState({
     content:"",
     image:"",
     category: "",
-    status:"d",
+    status:"p",
 })
 const {postBlogData} = useBlogCall()
 
@@ -41,7 +41,7 @@ const handleSubmit = (e) => {
         content:"",
         image:"",
         category: "",
-        status:"d",
+        status:"p",
         slug:"string"
     })
 }
@@ -107,26 +107,7 @@ const handleSubmit = (e) => {
               type="number"
               variant="outlined"
               onChange={handleChange}
-            />
-            {/* <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Status</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                type="text"
-                id="demo-simple-select"
-                variant="outlined"
-                value="p"
-                onChange={handleSelect}
-                
-              >
-                
-                <MenuItem >p</MenuItem>
-                
-              </Select>
-            </FormControl>
-            </Box> */}
-            
+            />            
             <Button variant="contained" type="submit" >Save Post</Button>
           </Box>
         </Box>

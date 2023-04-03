@@ -19,29 +19,28 @@ const style = {
   p: 4,
 };
 
-const CategoryModal = ({ open, handleClose, handleOpen } ) => {
-  const [category,setCategory] = useState({
-      name:"",
-     
-  })
+const CategoryModal = ({ open, handleClose, category, setCategory }) => {
+  
 
-const {postBlogData} = useBlogCall()
+  const { postBlogData , editBlogData} = useBlogCall();
 
-const handleSubmit = (e) => {
-    e.preventDefault()
-    postBlogData("categories",category)
-    handleClose()
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (category.id) {
+      editBlogData("categories", category);
+    } else {
+      postBlogData("categories", category);
+    }
+    handleClose();
     setCategory({
-        title:"",
-       
-    })
-}
-console.log(category)
-  const handleChange = (e) => {
-    const {name,value} = e.target
-    setCategory({...category, [name]: value})
+      title: "",
+    });
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCategory({ ...category, [name]: value });
+  };
 
   return (
     <div>
@@ -74,15 +73,14 @@ console.log(category)
               required
             />
 
-           
-            
-            <Button variant="contained" type="submit" >Add Category</Button>
+            <Button variant="contained" type="submit">
+              Add Category
+            </Button>
           </Box>
         </Box>
       </Modal>
     </div>
   );
-}
+};
 
-
-export default CategoryModal
+export default CategoryModal;

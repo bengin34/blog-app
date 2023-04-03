@@ -27,12 +27,8 @@ const pages = [
 ];
 const settings = [
   {
-    title: "Profile",
-    url: "/profile",
-  },
-  {
-    title: "Account",
-    url: "/categories",
+    title: "About",
+    url: "/about",
   },
   {
     title: "Logout",

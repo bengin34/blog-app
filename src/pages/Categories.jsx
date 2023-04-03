@@ -4,13 +4,10 @@ import { useEffect } from "react";
 import useBlogCall from "../hooks/useBlogCall";
 import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
-import CategoryModal from '../components/CategoryModal'
+import CategoryModal from "../components/CategoryModal";
 import { useState } from "react";
-
-const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "name", headerName: "Name", width: 200 },
-];
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function Categories() {
   const { getBlogData } = useBlogCall();
@@ -18,24 +15,70 @@ export default function Categories() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  console.log(categories);
+  const { deleteBlogData, editBlogData } = useBlogCall();
+  const [category, setCategory] = useState({
+    name: "",
+  });
 
   useEffect(() => {
     getBlogData("categories");
     // getNewsData();
   }, []);
 
+  const columns = [
+    { field: "id", headerName: "ID", width: 70 },
+    { field: "name", headerName: "Category Name", width: 300 },
+    {
+      field: "edit",
+      headerName: "Edit",
+      width: 120,
+      renderCell: (params) => (
+        <Button
+          startIcon={<EditIcon />}
+          size="small"
+          onClick={() => handleEdit(params.id)}
+        ></Button>
+      ),
+    },
+    {
+      field: "delete",
+      headerName: "Delete",
+      width: 120,
+      renderCell: (params) => (
+        <Button
+          startIcon={<DeleteIcon />}
+          size="small"
+          onClick={() => handleDelete(params.id)}
+        ></Button>
+      ),
+    },
+  ];
+console.log(category)
+  const handleEdit = (id) => {
+    console.log(id);
+    setOpen(true);
+    setCategory(category.name)
+    console.log(`Editing category with ID ${id}`);
+  };
+
+  const handleDelete = (id) => {
+    console.log(id);
+    deleteBlogData("categories", id);
+    console.log(`Deleting category with ID ${id}`);
+  };
+
   return (
     <>
-    <Button
-          variant="contained"
-          sx={{ margin: "1rem" }}
-          onClick={handleOpen}
-        >
-          Add Category
-        </Button>
-        <CategoryModal open={open} setOpen={setOpen} handleClose={handleClose} />
+      <Button variant="contained" sx={{ margin: "1rem" }} onClick={handleOpen}>
+        Add Category
+      </Button>
+      <CategoryModal
+        open={open}
+        setOpen={setOpen}
+        handleClose={handleClose}
+        category={category}
+        setCategory={setCategory}
+      />
       <div style={{ height: "85vh", width: "100%" }}>
         <DataGrid
           rows={categories}

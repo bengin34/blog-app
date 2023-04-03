@@ -2,6 +2,7 @@ import { fetchFail, getSuccess, fetchStart } from "../features/blogSlice";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import useAxios from "./useAxios";
+import {toastErrorNotify,toastSuccessNotify} from "../helper/ToastNotify"
 
 const useBlogCall = () => {
   const dispatch = useDispatch();
@@ -43,25 +44,42 @@ const useBlogCall = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.delete(`api/${url}/${id}`)
+      toastSuccessNotify(`ID: ${id} successfuly deleted`)
       getBlogData(url);
     } catch (error) {
       dispatch(fetchFail());
+      toastErrorNotify(`ID: ${id} can not be deleted`)
     }
   };
+
 
   const postBlogData = async (url, blog) => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.post(`api/${url}/`, blog)
+      toastSuccessNotify(`Blog successfuly added`)
       getBlogData(url);
     } catch (error) {
       dispatch(fetchFail());
+      toastErrorNotify(`${url} can not be posted`)
+    }
+  };
+
+  const editBlogData = async (url, blog) => {
+    dispatch(fetchStart());
+    try {
+      await axiosWithToken.put(`api/${url}/${blog.id}/`, blog);
+      toastSuccessNotify(`${url} successfuly updated`)
+      getBlogData(url);
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchFail());
+      toastErrorNotify(`${url} can not be updated`)
     }
   };
 
 
-
-  return { getBlogData, deleteBlogData,getNewsData, postBlogData };
+  return { getBlogData, deleteBlogData,getNewsData, postBlogData, editBlogData };
 };
 
 export default useBlogCall;
