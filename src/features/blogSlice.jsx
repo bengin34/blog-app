@@ -19,7 +19,7 @@ const blogSlice = createSlice({
             state.loading = false
             state[url] = data
         },
-        
+
         fetchFail: (state) => {
             state.loading = false
             state.error = true
@@ -29,5 +29,5 @@ const blogSlice = createSlice({
 })
 
 export const { fetchStart, getSuccess, fetchFail } =
-  stockSlice.actions
-export default stockSlice.reducer
+  blogSlice.actions
+export default blogSlice.reducer

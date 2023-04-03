@@ -59,7 +59,7 @@ const navigate = useNavigate()
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-    
+
     
 
   };
@@ -97,8 +97,8 @@ const navigate = useNavigate()
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={() => (navigate(page.url),handleCloseNavMenu())}>
+              {pages.map((page,index) => (
+                <MenuItem key={index} onClick={() => (navigate(page.url),handleCloseNavMenu())}>
                   <Typography textAlign="center">{page.title}</Typography>
                 </MenuItem>
               ))}
@@ -124,9 +124,9 @@ const navigate = useNavigate()
             Tech Blog
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {pages.map((page,index) => (
               <Button
-                key={page}
+                key={index}
                 onClick={() => (navigate(page.url),handleCloseNavMenu())}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
@@ -157,8 +157,8 @@ const navigate = useNavigate()
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={() => (navigate(setting.url),handleCloseUserMenu())}>
+              {settings.map((setting,index) => (
+                <MenuItem key={index} onClick={() => (navigate(setting.url),handleCloseUserMenu())}>
                   <Typography textAlign="center">{setting.title}</Typography>
                 </MenuItem>
               ))}
