@@ -48,7 +48,20 @@ const useBlogCall = () => {
       dispatch(fetchFail());
     }
   };
-  return { getBlogData, deleteBlogData,getNewsData };
+
+  const postBlogData = async (url, blog) => {
+    dispatch(fetchStart());
+    try {
+      await axiosWithToken.post(`api/${url}/`, blog)
+      getBlogData(url);
+    } catch (error) {
+      dispatch(fetchFail());
+    }
+  };
+
+
+
+  return { getBlogData, deleteBlogData,getNewsData, postBlogData };
 };
 
 export default useBlogCall;

@@ -4,7 +4,7 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
+import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -50,7 +50,7 @@ export const BlogCard = ({ blog }) => {
           {blog.content}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions disableSpacing  >
         <IconButton aria-label="add to favorites">
           <FavoriteIcon sx={{ color: "pink" }} />
           <Typography>{blog.likes}</Typography>
@@ -59,6 +59,7 @@ export const BlogCard = ({ blog }) => {
           <RemoveRedEyeIcon color="success" />
           <Typography>{blog.post_views}</Typography>
         </IconButton>
+        <Button  >Read More</Button>
       </CardActions>
     </Card>
   );

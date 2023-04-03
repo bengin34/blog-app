@@ -8,6 +8,8 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 import { useState } from "react";
+import useBlogCall from "../hooks/useBlogCall";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -26,16 +28,30 @@ const [blog,setBlog] = useState({
     content:"",
     image:"",
     category: "",
-    status:"",
+    status:"d",
 })
+const {postBlogData} = useBlogCall()
 
+const handleSubmit = (e) => {
+    e.preventDefault()
+    postBlogData("blogs",blog)
+    handleClose()
+    setBlog({
+        title:"",
+        content:"",
+        image:"",
+        category: "",
+        status:"d",
+        slug:"string"
+    })
+}
 
   const handleChange = (e) => {
     const {name,value} = e.target
     setBlog({...blog, [name]: value})
-
   };
-console.log(blog)
+
+
   return (
     <div>
       <Modal
@@ -54,6 +70,8 @@ console.log(blog)
               flexDirection: "column",
               gap: 2,
             }}
+            component="form"
+            onSubmit={handleSubmit}
           >
             <TextField
               label="Blog Title"
@@ -61,7 +79,6 @@ console.log(blog)
               id="title"
               type="text"
               variant="outlined"
-              //   value={blog?.title}
               onChange={handleChange}
               required
             />
@@ -87,17 +104,20 @@ console.log(blog)
               label="Category"
               name="category"
               id="category"
-              type="text"
+              type="number"
               variant="outlined"
               onChange={handleChange}
             />
-            <FormControl fullWidth>
+            {/* <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Status</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
+                type="text"
                 id="demo-simple-select"
                 variant="outlined"
-                onChange={handleChange}
+                value="p"
+                onChange={handleSelect}
                 
               >
                 
@@ -105,6 +125,8 @@ console.log(blog)
                 
               </Select>
             </FormControl>
+            </Box> */}
+            
             <Button variant="contained" type="submit" >Save Post</Button>
           </Box>
         </Box>
