@@ -8,8 +8,7 @@ const useBlogCall = () => {
 
   const getBlogData = async (url) => {
     const BASE_URL = "http://32332.fullstack.clarusway.com/";
-    dispatch(fetchStart())
-   
+    dispatch(fetchStart());
 
     try {
       const { data } = await axios(`${BASE_URL}api/${url}/`, {
@@ -21,7 +20,20 @@ const useBlogCall = () => {
       dispatch(fetchFail());
     }
   };
-  return { getBlogData };
+
+  const deleteBlogData = async (url, id) => {
+    const BASE_URL = "http://32332.fullstack.clarusway.com/";
+    dispatch(fetchStart());
+    try {
+      await axios.delete(`${BASE_URL}api/${url}/${id}`, {
+        headers: { Authorization: `Token ${token}` },
+      });
+      getBlogData();
+    } catch (error) {
+      dispatch(fetchFail());
+    }
+  };
+  return { getBlogData, deleteBlogData };
 };
 
 export default useBlogCall;

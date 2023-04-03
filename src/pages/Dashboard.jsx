@@ -19,7 +19,9 @@ const { getBlogData} = useBlogCall()
         <Button variant="contained" sx={{ margin: "1rem" }}>
           New Blog
         </Button>
+        {/* {blogs?.map(() => (
 
+        ))} */}
         <BlogCard />
       </Container>
     </>
