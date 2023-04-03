@@ -1,34 +1,34 @@
 import { fetchFail, getSuccess, fetchStart } from "../features/blogSlice";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import useAxios from "./useAxios";
 
 const useBlogCall = () => {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
+  const {axiosWithToken} = useAxios()
 
   const getBlogData = async (url) => {
-    const BASE_URL = "http://32332.fullstack.clarusway.com/";
+  
     dispatch(fetchStart());
 
     try {
-      const { data } = await axios(`${BASE_URL}api/${url}/`, {
-        headers: { Authorization: `Token ${token}` },
-      });
+      // const { data } = await axios(`${BASE_URL}api/${url}/`, {
+      //   headers: { Authorization: `Token ${token}` },
+      // });
+      const {data} = await axiosWithToken.get(`api/${url}/`)
       dispatch(getSuccess({ data, url }));
-      console.log(data);
     } catch (error) {
       dispatch(fetchFail());
     }
   };
 
   const deleteBlogData = async (url, id) => {
-    const BASE_URL = "http://32332.fullstack.clarusway.com/";
+
     dispatch(fetchStart());
     try {
-      await axios.delete(`${BASE_URL}api/${url}/${id}`, {
-        headers: { Authorization: `Token ${token}` },
-      });
-      getBlogData();
+      await axiosWithToken.delete(`api/${url}/${id}`)
+      getBlogData(url);
     } catch (error) {
       dispatch(fetchFail());
     }
