@@ -1,0 +1,114 @@
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+import { Typography } from "@mui/material";
+import { useState } from "react";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
+export default function NewBlogModal({ open, onClose, handleClose }) {
+const [blog,setBlog] = useState({
+    title:"",
+    content:"",
+    image:"",
+    category: "",
+    status:"",
+})
+
+
+  const handleChange = (e) => {
+    const {name,value} = e.target
+    setBlog({...blog, [name]: value})
+
+  };
+console.log(blog)
+  return (
+    <div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography variant="h5" marginBottom={1}>
+            New Blog
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            }}
+          >
+            <TextField
+              label="Blog Title"
+              name="title"
+              id="title"
+              type="text"
+              variant="outlined"
+              //   value={blog?.title}
+              onChange={handleChange}
+              required
+            />
+
+            <TextField
+              label="Blog Content"
+              name="content"
+              id="content"
+              type="text"
+              variant="outlined"
+              onChange={handleChange}
+              required
+            />
+            <TextField
+              label="Image"
+              name="image"
+              id="image"
+              type="text"
+              variant="outlined"
+              onChange={handleChange}
+            />
+            <TextField
+              label="Category"
+              name="category"
+              id="category"
+              type="text"
+              variant="outlined"
+              onChange={handleChange}
+            />
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Status</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                variant="outlined"
+                onChange={handleChange}
+                
+              >
+                
+                <MenuItem >p</MenuItem>
+                
+              </Select>
+            </FormControl>
+            <Button variant="contained" type="submit" >Save Post</Button>
+          </Box>
+        </Box>
+      </Modal>
+    </div>
+  );
+}
