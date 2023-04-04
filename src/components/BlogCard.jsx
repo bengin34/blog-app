@@ -7,13 +7,16 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
+import ForumIcon from '@mui/icons-material/Forum';
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { useNavigate } from "react-router-dom";
 
 export const BlogCard = ({ blog }) => {
+  const navigate = useNavigate()
   return (
     <Card
       sx={{
@@ -47,19 +50,23 @@ export const BlogCard = ({ blog }) => {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {blog.content}
+          {blog.content.slice(0,130)} ... 
         </Typography>
       </CardContent>
       <CardActions disableSpacing  >
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon sx={{ color: "pink" }} />
+          <FavoriteIcon color="error" />
           <Typography>{blog.likes}</Typography>
         </IconButton>
         <IconButton aria-label="share">
           <RemoveRedEyeIcon color="success" />
           <Typography>{blog.post_views}</Typography>
         </IconButton>
-        <Button  >Read More</Button>
+        <IconButton aria-label="share">
+          <ForumIcon color="info" />
+          <Typography>{blog.comment_count}</Typography>
+        </IconButton>
+        <Button variant="outlined" onClick={(id) => navigate(`/${blog.id}`)} >Read More</Button>
       </CardActions>
     </Card>
   );

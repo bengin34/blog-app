@@ -21,7 +21,7 @@ const Dashboard = () => {
     getBlogData("blogs");
     // getNewsData();
   }, []);
-  console.log(blogs);
+
   return (
     <>
       <Container sx={{ margin: "1rem" }} maxWidth="%100">

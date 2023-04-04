@@ -23,6 +23,17 @@ const useBlogCall = () => {
       dispatch(fetchFail());
     }
   };
+  const readBlogData = async (url,id) => {
+  
+    dispatch(fetchStart());
+
+    try {
+      const {data} = await axiosWithToken.get(`api/${url}/${id}`)
+      dispatch(getSuccess({ data, url }));
+    } catch (error) {
+      dispatch(fetchFail());
+    }
+  };
   const getNewsData = async (url) => {
   
     dispatch(fetchStart());
@@ -79,7 +90,7 @@ const useBlogCall = () => {
   };
 
 
-  return { getBlogData, deleteBlogData,getNewsData, postBlogData, editBlogData };
+  return { getBlogData, deleteBlogData,getNewsData, postBlogData, editBlogData,readBlogData };
 };
 
 export default useBlogCall;

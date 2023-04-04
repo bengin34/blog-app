@@ -9,6 +9,7 @@ import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRouter from "./PrivateRouter";
+import Details from "../pages/Details";
 
 
 const AppRouter = () => {
@@ -21,7 +22,9 @@ const AppRouter = () => {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<PrivateRouter />}>
-          <Route path="dashboard"  element={<Dashboard />}/>
+          <Route path="dashboard"  element={<Dashboard />}/> 
+          <Route path="/id"  element={<Details />}/>
+          
           <Route path="categories"  element={<Categories />}/>
           
      
