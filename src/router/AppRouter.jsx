@@ -17,7 +17,7 @@ const AppRouter = () => {
 
   return (
     <BrowserRouter>
-    <main className="main-container">
+
       {currentUser && <Navbar />}
       <Routes>
         <Route path="/" element={<Login />} />
@@ -25,12 +25,11 @@ const AppRouter = () => {
         <Route path="/" element={<PrivateRouter />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="blogs/:id" element={<Details />} />
-
           <Route path="categories" element={<Categories />} />
         </Route>
       </Routes>
-      <Footer className="footer" />
-      </main>
+      <Footer  />
+
     </BrowserRouter>
   );
 };

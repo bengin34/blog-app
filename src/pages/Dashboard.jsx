@@ -12,6 +12,7 @@ import NewBlogModal from "../components/NewBlogModal";
 const Dashboard = () => {
   const { getBlogData, getNewsData } = useBlogCall();
   const { blogs } = useSelector((state) => state.blog);
+  const { news } = useSelector((state) => state.blog);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -21,6 +22,7 @@ const Dashboard = () => {
     getBlogData("blogs");
     // getNewsData();
   }, []);
+console.log(news)
 
   return (
     <>
@@ -36,14 +38,15 @@ const Dashboard = () => {
         <Grid container>
           {" "}
           <Grid container md={9} xs={12} spacing={3}>
-            {blogs?.map((blog, index) => (
-              <Grid item key={index}>
-                <BlogCard blog={blog} key={index} />
+
+            {blogs.length && blogs?.map((blog) => (
+              <Grid item>
+                <BlogCard blog={blog} key={blog.id}  />
               </Grid>
             ))}
           </Grid>
           <Grid sx={{ marginTop: "1rem" }} item md={3} xs={12}>
-            <NewsList item />
+            <NewsList item news={news} />
           </Grid>
         </Grid>
       </Container>

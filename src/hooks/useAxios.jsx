@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 import { useSelector } from "react-redux";
 
 const useAxios = () => {
@@ -9,18 +8,13 @@ const useAxios = () => {
     headers: { Authorization: `Token ${token}` },
   });
 
-  const getNews = axios.create({
-    method: 'GET',
-    baseURL: 'https://google-news-api1.p.rapidapi.com/search',
-    params: {language: 'en'},
-    headers: {
-      'X-RapidAPI-Key': process.env.REACT_APP_NEWS_API_KEY,
-      'X-RapidAPI-Host': 'google-news-api1.p.rapidapi.com'
-    }
-  });
+  const apiKey = process.env.REACT_APP_NEWS_API_KEY;
   
+  const getNews = axios.create({
+    baseURL: `https://newsdata.io/api/1/news?apikey=${apiKey}&q=technology&language=en&category=technology`,
+  });
 
-  return {axiosWithToken, getNews}
+  return { axiosWithToken, getNews };
 };
 
 export default useAxios;

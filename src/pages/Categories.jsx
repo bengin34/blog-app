@@ -36,7 +36,7 @@ export default function Categories() {
         <Button
           startIcon={<EditIcon />}
           size="small"
-          onClick={() => handleEdit(params.id)}
+          onClick={() => handleEdit(params.row)}
         ></Button>
       ),
     },
@@ -57,7 +57,8 @@ console.log(category)
   const handleEdit = (id) => {
     console.log(id);
     setOpen(true);
-    setCategory(category.name)
+    setCategory(id)
+    console.log(category)
     console.log(`Editing category with ID ${id}`);
   };
 

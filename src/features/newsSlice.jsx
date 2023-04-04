@@ -1,12 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const blogSlice = createSlice({
-    name:'blog',
+const newsSlice = createSlice({
+    name:'news',
 
     initialState: {
-        blogs:[],
-        authors:[],
-        categories:[],
         news:[],
         loading:false,
         error:false,
@@ -29,6 +26,6 @@ const blogSlice = createSlice({
 
 })
 
-export const { fetchStart, getSuccess, fetchFail } = blogSlice.actions
+export const { fetchStart, getSuccess, fetchFail } = newsSlice.actions
 
-export default blogSlice.reducer
+export default newsSlice.reducer

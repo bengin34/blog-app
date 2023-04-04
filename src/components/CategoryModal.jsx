@@ -69,6 +69,7 @@ const CategoryModal = ({ open, handleClose, category, setCategory }) => {
               id="category"
               type="text"
               variant="outlined"
+              value={category.name || ""}
               onChange={handleChange}
               required
             />

@@ -11,7 +11,6 @@ const useBlogCall = () => {
 
   const getBlogData = async (url) => {
     dispatch(fetchStart());
-
     try {
       // const { data } = await axios(`${BASE_URL}api/${url}/`, {
       //   headers: { Authorization: `Token ${token}` },
@@ -31,16 +30,12 @@ const useBlogCall = () => {
       dispatch(fetchFail());
     }
   };
-  const getNewsData = async (url) => {
-    dispatch(fetchStart());
 
+  const getNewsData = async () => {
+    dispatch(fetchStart());
     try {
-      // const { data } = await axios(`${BASE_URL}api/${url}/`, {
-      //   headers: { Authorization: `Token ${token}` },
-      // });
       const { data } = await getNews.get();
-      console.log(data.news.news);
-      // dispatch(getSuccess({ data, url }));
+      dispatch(getSuccess({ data: data.results, url: "news" }));
     } catch (error) {
       dispatch(fetchFail());
     }
