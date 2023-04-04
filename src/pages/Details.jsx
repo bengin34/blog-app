@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import useBlogCall from "../hooks/useBlogCall";
@@ -10,17 +10,34 @@ import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
+import NewPostModal from "../components/NewPostModal";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import NewBlogModal from "../components/NewBlogModal";
+
 
 const Detail = () => {
-  const [blogDetails, setBlogDetails] = useState("");
+  const navigate = useNavigate()
   const { blogs } = useSelector((state) => state.blog);
   const { id } = useParams();
-  const { readBlogData } = useBlogCall();
+  const { readBlogData, deleteBlogData, editBlogData } = useBlogCall();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const[openBlog,setOpenBlog] = useState(false)
+  const handleBlogOpen = () =>setOpenBlog(true)
 
   useEffect(() => {
     readBlogData("blogs", id);
   }, []);
-  console.log(blogs);
+
+const handleDelete = () => {
+console.log(id)
+deleteBlogData("blogs", id);
+navigate("/dashboard")
+console.log(`Deleting category with ID ${id}`);
+}
+
 
   return (
     <Container>
@@ -38,25 +55,50 @@ const Detail = () => {
               minHeight: "300px",
             }}
           >
-            <Paper  sx={{
+            <Paper
+              sx={{
                 display: "flex",
+                flexDirection: "row",
                 justifyContent: "center",
                 alignItems: "center",
                 flexWrap: "wrap",
                 gap: "1rem",
                 padding: "3rem",
-              }}>
+              }}
+            >
               {" "}
-              <Typography variant="h3" sx={{ display: "block" }}>
-                {blogs?.title}
-              </Typography>
-              <Typography marginTop={2} variant="h6">
-                {blogs?.content}
-              </Typography>
-              <Typography marginTop={2} variant="p" marginBottom={5}>
-                Written by: {blogs?.author} Created Date:{" "}
-                {blogs?.publish_date?.slice(0, 10)}{" "}
-              </Typography>{" "}
+              <Box>
+                <Typography variant="h3" sx={{ display: "block" }}>
+                  {blogs?.title}
+                </Typography>
+                <Typography marginTop={2} variant="h6">
+                  {blogs?.content}
+                </Typography>
+                <Typography
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  marginTop={2}
+                  variant="p"
+                  marginBottom={5}
+                >
+                  Written by: {blogs?.author} Created Date:{" "}
+                  {blogs?.publish_date?.slice(0, 10)}{" "}
+                </Typography>
+                <Box sx={{
+                  display:'flex',
+                  justifyContent:'space-evenly',
+                  alignItems:'center'
+                }} >
+                  <Button variant="outlined" onClick={handleBlogOpen} ><EditIcon/></Button>
+                  <NewBlogModal openBlog={openBlog} setOpen={setOpen} />
+                <Button variant="outlined" onClick={handleDelete} ><DeleteIcon/></Button>
+                </Box>
+                
+              </Box>{" "}
+
             </Paper>
 
             <Paper
@@ -89,9 +131,19 @@ const Detail = () => {
                 </Paper>
               ))}
             </Paper>
-            <Button sx={{ marginTop: "20px" }} variant="outlined">
-              Add New Post
+            <Button
+              sx={{ marginTop: "20px" }}
+              variant="outlined"
+              onClick={handleOpen}
+            >
+              Add New Comment
             </Button>
+            <NewPostModal
+              blogs={blogs}
+              open={open}
+              setOpen={setOpen}
+              handleClose={handleClose}
+            />
           </Box>
         </Container>
       </Box>

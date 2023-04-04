@@ -21,6 +21,7 @@ const useBlogCall = () => {
       dispatch(fetchFail());
     }
   };
+
   const readBlogData = async (url, id) => {
     dispatch(fetchStart());
     try {
@@ -49,7 +50,7 @@ const useBlogCall = () => {
       getBlogData(url);
     } catch (error) {
       dispatch(fetchFail());
-      toastErrorNotify(`ID: ${id} can not be deleted`);
+      toastErrorNotify(`This can not be deleted`);
     }
   };
 
@@ -64,6 +65,16 @@ const useBlogCall = () => {
       toastErrorNotify(`${url} can not be posted`);
     }
   };
+  const postLike = async (url, blogId) => {
+    dispatch(fetchStart());
+    try {
+      await axiosWithToken.post(`api/${url}/${blogId}/`);
+      getBlogData("blogs");
+    } catch (error) {
+      dispatch(fetchFail());
+    }
+  };
+  
 
   const editBlogData = async (url, blog) => {
     dispatch(fetchStart());
@@ -78,6 +89,20 @@ const useBlogCall = () => {
     }
   };
 
+
+  const postCommentData = async (url, comment) => {
+    dispatch(fetchStart());
+    try {
+      await axiosWithToken.post(`api/${url}/${comment.post}/`, comment);
+      toastSuccessNotify(`Comment successfuly added`);
+      getBlogData(url);
+      readBlogData("blogs",comment.post);
+    } catch (error) {
+      dispatch(fetchFail());
+      toastErrorNotify(`Comment can not be posted`);
+    }
+  };
+
   return {
     getBlogData,
     deleteBlogData,
@@ -85,6 +110,8 @@ const useBlogCall = () => {
     postBlogData,
     editBlogData,
     readBlogData,
+    postCommentData,
+    postLike
   };
 };
 

@@ -1,10 +1,12 @@
 import Box from "@mui/material/Box";
+
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 import { useState } from "react";
 import useBlogCall from "../hooks/useBlogCall";
+import { useParams } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -18,35 +20,35 @@ const style = {
   p: 4,
 };
 
-export default function NewBlogModal({ open, onClose, handleClose }) {
-const [blog,setBlog] = useState({
-    title:"",
-    content:"",
-    image:"",
-    category: "",
-    status:"p",
-})
-const {postBlogData} = useBlogCall()
+const NewPostModal = ({ open, handleClose, blogs }) => {
+  const { id } = useParams()
+  const { comments} = blogs;
+ 
+  const [comment, setComment] = useState({
+    content: "",
+    post: id,
+   
+  });
 
-const handleSubmit = (e) => {
-    e.preventDefault()
-    postBlogData("blogs",blog)
-    handleClose()
-    setBlog({
-        title:"",
-        content:"",
-        image:"",
-        category: "",
-        status:"p",
-        slug:"string"
-    })
-}
+  const { postCommentData } = useBlogCall();
+
 
   const handleChange = (e) => {
-    const {name,value} = e.target
-    setBlog({...blog, [name]: value})
+    const { name, value } = e.target;
+    setComment({ ...comment, [name]: value });
   };
 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    postCommentData("comments", comment);
+    handleClose();
+    setComment({
+      content: "",
+      id:"",
+     
+    });
+  };
 
   return (
     <div>
@@ -58,7 +60,7 @@ const handleSubmit = (e) => {
       >
         <Box sx={style}>
           <Typography variant="h5" marginBottom={1}>
-            New Blog
+            New Post
           </Typography>
           <Box
             sx={{
@@ -70,17 +72,7 @@ const handleSubmit = (e) => {
             onSubmit={handleSubmit}
           >
             <TextField
-              label="Blog Title"
-              name="title"
-              id="title"
-              type="text"
-              variant="outlined"
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              label="Blog Content"
-              multiline
+              label="Content"
               name="content"
               id="content"
               type="text"
@@ -88,26 +80,24 @@ const handleSubmit = (e) => {
               onChange={handleChange}
               required
             />
-            <TextField
-              label="Image"
-              name="image"
-              id="image"
-              type="text"
-              variant="outlined"
-              onChange={handleChange}
-            />
-            <TextField
-              label="Category"
-              name="category"
-              id="category"
+            {/* <TextField
+              label="posts"
+              name="posts"
+              id="posts"
               type="number"
               variant="outlined"
               onChange={handleChange}
-            />            
-            <Button variant="contained" type="submit" >Save Post</Button>
+              required
+            /> */}
+
+            <Button variant="contained" type="submit">
+              Add Comment
+            </Button>
           </Box>
         </Box>
       </Modal>
     </div>
   );
-}
+};
+
+export default NewPostModal;

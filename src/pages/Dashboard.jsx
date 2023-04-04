@@ -8,9 +8,12 @@ import { useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import NewsList from "../components/NewsList";
 import NewBlogModal from "../components/NewBlogModal";
+import { useParams } from "react-router-dom";
+
 
 const Dashboard = () => {
-  const { getBlogData, getNewsData } = useBlogCall();
+  const { getBlogData, getNewsData, readBlogData } = useBlogCall();
+  const {id} = useParams()
   const { blogs } = useSelector((state) => state.blog);
   const { news } = useSelector((state) => state.blog);
   const [open, setOpen] = useState(false);
@@ -25,19 +28,25 @@ const Dashboard = () => {
 console.log(news)
 
   return (
-    <>
+    <Paper >
       <Container sx={{ margin: "1rem" }} maxWidth="%100">
         <Button
           variant="contained"
           sx={{ margin: "1rem" }}
           onClick={handleOpen}
+          
         >
           New Blog
         </Button>
         <NewBlogModal open={open} setOpen={setOpen} handleClose={handleClose} />
         <Grid container>
           {" "}
-          <Grid container md={9} xs={12} spacing={3}>
+          <Grid  sx={{
+      display:'flex',
+      justifyContent:'center',
+      alignItems:'center',
+      marginBottom:'1rem'
+    }} container md={9} xs={12} spacing={3}>
 
             {blogs.length && blogs?.map((blog) => (
               <Grid item>
@@ -45,12 +54,12 @@ console.log(news)
               </Grid>
             ))}
           </Grid>
-          <Grid sx={{ marginTop: "1rem" }} item md={3} xs={12}>
+          <Grid sx={{ marginTop: "1rem", display:'flex', justifyContent:'center',  }} item md={3} xs={12}>
             <NewsList item news={news} />
           </Grid>
         </Grid>
       </Container>
-    </>
+    </Paper>
   );
 };
 

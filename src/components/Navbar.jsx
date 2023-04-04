@@ -27,10 +27,6 @@ const pages = [
 ];
 const settings = [
   {
-    title: "About",
-    url: "/about",
-  },
-  {
     title: "Logout",
     url: "/",
   },

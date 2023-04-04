@@ -14,9 +14,20 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { useNavigate } from "react-router-dom";
+import useBlogCall from "../hooks/useBlogCall";
+import { useParams } from "react-router-dom";
+
 
 export const BlogCard = ({ blog }) => {
   const navigate = useNavigate()
+  const {postLike} = useBlogCall()
+  const {id} = useParams()
+  
+
+  console.log(blog)
+
+
+
   return (
     <Card
       sx={{
@@ -54,8 +65,8 @@ export const BlogCard = ({ blog }) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing  >
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon color="error" />
+        <IconButton aria-label="add to favorites" >
+          <FavoriteIcon onClick={() => postLike("likes",blog.id)}  color="error" />
           <Typography>{blog.likes}</Typography>
         </IconButton>
         <IconButton aria-label="share">
