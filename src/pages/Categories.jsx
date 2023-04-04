@@ -79,7 +79,7 @@ console.log(category)
         category={category}
         setCategory={setCategory}
       />
-      <div style={{ height: "85vh", width: "100%" }}>
+      <div style={{ height: "75vh", width: "100%" }}>
         <DataGrid
           rows={categories}
           columns={columns}

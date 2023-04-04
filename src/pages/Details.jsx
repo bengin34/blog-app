@@ -20,15 +20,15 @@ const Detail = () => {
 
   return (
     <Container>
-      <Box sx={{ height: "90vh" }}>
+      <Box >
         <Box padding={5} sx={{ display: "flex", justifyContent: "center",  }}>
           <img src={blogs?.image} />
         </Box>
         <Container>
-        <Box sx={{ display: "flex", flexDirection:'column', justifyContent: "scenter", alignItems:'center' }}>
+        <Box sx={{ display: "flex", flexDirection:'column', justifyContent: "space-between", alignItems:'center', minHeight:'300px' }}>
           <Typography variant="h3" sx={{display:'block'}} >{blogs?.title}</Typography>
           <Typography marginTop={2} variant="h6" >{blogs?.content}</Typography>
-          <Typography marginTop={2} variant="p" >Written by: {blogs?.author} Created Date: {blogs?.publish_date.slice(0,10)} </Typography>
+          <Typography marginTop={2} variant="p" >Written by: {blogs?.author} Created Date: {blogs?.publish_date?.slice(0,10)} </Typography>
 
         </Box>
         </Container>

@@ -82,9 +82,9 @@ const handleSubmit = (e) => {
               onChange={handleChange}
               required
             />
-
             <TextField
               label="Blog Content"
+              multiline
               name="content"
               id="content"
               type="text"

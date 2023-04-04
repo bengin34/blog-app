@@ -12,26 +12,25 @@ import PrivateRouter from "./PrivateRouter";
 import Details from "../pages/Details";
 import Footer from "../components/Footer";
 
-
 const AppRouter = () => {
   const { currentUser } = useSelector((state) => state.auth);
-  
+
   return (
     <BrowserRouter>
-     {currentUser && <Navbar /> } 
+    <main className="main-container">
+      {currentUser && <Navbar />}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<PrivateRouter />}>
-          <Route path="dashboard"  element={<Dashboard />}/> 
-          <Route path="blogs/:id"  element={<Details />}/>
-          
-          <Route path="categories"  element={<Categories />}/>
-          
-     
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="blogs/:id" element={<Details />} />
+
+          <Route path="categories" element={<Categories />} />
         </Route>
       </Routes>
-      <Footer/>
+      <Footer className="footer" />
+      </main>
     </BrowserRouter>
   );
 };
