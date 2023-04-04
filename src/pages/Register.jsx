@@ -6,7 +6,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import { Formik } from "formik";
 import image from "../helper/background.jpg";
 import Grid from "@mui/material/Grid";
-import RegisterForm, { registerSchema } from "../components/RegisterForm";
+import RegisterForm, { registerSchema } from "../components/auth/RegisterForm";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 

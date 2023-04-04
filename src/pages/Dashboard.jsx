@@ -7,7 +7,7 @@ import useBlogCall from "../hooks/useBlogCall";
 import { useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import NewsList from "../components/NewsList";
-import NewBlogModal from "../components/NewBlogModal";
+import NewBlogModal from "../components/modals/NewBlogModal";
 import { useParams } from "react-router-dom";
 
 

@@ -10,34 +10,32 @@ import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
-import NewPostModal from "../components/NewPostModal";
+import NewPostModal from "../components/modals/NewPostModal";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import NewBlogModal from "../components/NewBlogModal";
-
+import NewBlogModal from "../components/modals/NewBlogModal";
 
 const Detail = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { blogs } = useSelector((state) => state.blog);
   const { id } = useParams();
   const { readBlogData, deleteBlogData, editBlogData } = useBlogCall();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const[openBlog,setOpenBlog] = useState(false)
-  const handleBlogOpen = () =>setOpenBlog(true)
+  const [openBlog, setOpenBlog] = useState(false);
+  const handleBlogOpen = () => setOpenBlog(true);
 
   useEffect(() => {
     readBlogData("blogs", id);
   }, []);
 
-const handleDelete = () => {
-console.log(id)
-deleteBlogData("blogs", id);
-navigate("/dashboard")
-console.log(`Deleting category with ID ${id}`);
-}
-
+  const handleDelete = () => {
+    console.log(id);
+    deleteBlogData("blogs", id);
+    navigate("/dashboard");
+    console.log(`Deleting category with ID ${id}`);
+  };
 
   return (
     <Container>
@@ -87,18 +85,22 @@ console.log(`Deleting category with ID ${id}`);
                   Written by: {blogs?.author} Created Date:{" "}
                   {blogs?.publish_date?.slice(0, 10)}{" "}
                 </Typography>
-                <Box sx={{
-                  display:'flex',
-                  justifyContent:'space-evenly',
-                  alignItems:'center'
-                }} >
-                  <Button variant="outlined" onClick={handleBlogOpen} ><EditIcon/></Button>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-evenly",
+                    alignItems: "center",
+                  }}
+                >
+                  <Button variant="outlined" onClick={handleBlogOpen}>
+                    <EditIcon />
+                  </Button>
                   <NewBlogModal openBlog={openBlog} setOpen={setOpen} />
-                <Button variant="outlined" onClick={handleDelete} ><DeleteIcon/></Button>
+                  <Button variant="outlined" onClick={handleDelete}>
+                    <DeleteIcon />
+                  </Button>
                 </Box>
-                
               </Box>{" "}
-
             </Paper>
 
             <Paper

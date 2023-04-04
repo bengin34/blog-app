@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import useBlogCall from "../hooks/useBlogCall";
 import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
-import CategoryModal from "../components/CategoryModal";
+import CategoryModal from "../components/modals/CategoryModal";
 import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";

@@ -5,8 +5,7 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 import { useState } from "react";
-import useBlogCall from "../hooks/useBlogCall";
-import { useParams } from "react-router-dom";
+import useBlogCall from "../../hooks/useBlogCall";
 
 const style = {
   position: "absolute",
@@ -20,34 +19,27 @@ const style = {
   p: 4,
 };
 
-const NewPostModal = ({ open, handleClose, blogs }) => {
-  const { id } = useParams()
-  const { comments} = blogs;
- 
-  const [comment, setComment] = useState({
-    content: "",
-    post: id,
-   
-  });
+const CategoryModal = ({ open, handleClose, category, setCategory }) => {
+  
 
-  const { postCommentData } = useBlogCall();
-
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setComment({ ...comment, [name]: value });
-  };
-
+  const { postBlogData , editBlogData} = useBlogCall();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postCommentData("comments", comment);
+    if (category.id) {
+      editBlogData("categories", category);
+    } else {
+      postBlogData("categories", category);
+    }
     handleClose();
-    setComment({
-      content: "",
-      id:"",
-     
+    setCategory({
+      title: "",
     });
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCategory({ ...category, [name]: value });
   };
 
   return (
@@ -60,7 +52,7 @@ const NewPostModal = ({ open, handleClose, blogs }) => {
       >
         <Box sx={style}>
           <Typography variant="h5" marginBottom={1}>
-            New Post
+            New Category
           </Typography>
           <Box
             sx={{
@@ -72,26 +64,18 @@ const NewPostModal = ({ open, handleClose, blogs }) => {
             onSubmit={handleSubmit}
           >
             <TextField
-              label="Content"
-              name="content"
-              id="content"
+              label="Category Name"
+              name="name"
+              id="category"
               type="text"
               variant="outlined"
+              value={category.name || ""}
               onChange={handleChange}
               required
             />
-            {/* <TextField
-              label="posts"
-              name="posts"
-              id="posts"
-              type="number"
-              variant="outlined"
-              onChange={handleChange}
-              required
-            /> */}
 
             <Button variant="contained" type="submit">
-              Add Comment
+              Add Category
             </Button>
           </Box>
         </Box>
@@ -100,4 +84,4 @@ const NewPostModal = ({ open, handleClose, blogs }) => {
   );
 };
 
-export default NewPostModal;
+export default CategoryModal;

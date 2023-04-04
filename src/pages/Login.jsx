@@ -8,7 +8,7 @@ import image from  "../helper/background.jpg"
 
 import { Link } from "react-router-dom"
 import { Formik } from "formik"
-import LoginForm, { loginScheme } from "../components/LoginForm"
+import LoginForm, { loginScheme } from "../components/auth/LoginForm"
 import useAuthCall from '../hooks/useAuthCall'
 
 const Login = () => {
