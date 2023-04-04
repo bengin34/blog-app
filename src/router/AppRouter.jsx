@@ -10,6 +10,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRouter from "./PrivateRouter";
 import Details from "../pages/Details";
+import Footer from "../components/Footer";
 
 
 const AppRouter = () => {
@@ -23,13 +24,14 @@ const AppRouter = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<PrivateRouter />}>
           <Route path="dashboard"  element={<Dashboard />}/> 
-          <Route path="/id"  element={<Details />}/>
+          <Route path="blogs/:id"  element={<Details />}/>
           
           <Route path="categories"  element={<Categories />}/>
           
      
         </Route>
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 };

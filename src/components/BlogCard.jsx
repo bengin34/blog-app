@@ -66,7 +66,7 @@ export const BlogCard = ({ blog }) => {
           <ForumIcon color="info" />
           <Typography>{blog.comment_count}</Typography>
         </IconButton>
-        <Button variant="outlined" onClick={(id) => navigate(`/${blog.id}`)} >Read More</Button>
+        <Button variant="outlined" onClick={(id) => navigate(`/blogs/${blog.id}`)} >Read More</Button>
       </CardActions>
     </Card>
   );
