@@ -6,7 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { border } from "@mui/system";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -42,9 +42,13 @@ const NewsList = ({ news }) => {
                     {item?.creator}
                   </Typography>
                   -- {item?.description.slice(0, 120)}...
-                  <Button onClick={() => navigate({ to: item.link })}>
+                  <Link to={item?.link}  target="_blank" rel="noopener noreferrer">
+                    <Button >
+
                     Read News
                   </Button>
+                  </Link>
+                  
                 </React.Fragment>
               }
             />

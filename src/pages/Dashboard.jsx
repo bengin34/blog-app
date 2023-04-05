@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 
 
 const Dashboard = () => {
-  const { getBlogData, getNewsData, readBlogData } = useBlogCall();
+  const { getBlogData, getNewsData } = useBlogCall();
   const {id} = useParams()
   const { blogs } = useSelector((state) => state.blog);
   const { news } = useSelector((state) => state.blog);
@@ -23,9 +23,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     getBlogData("blogs");
-    // getNewsData();
+    getNewsData();
   }, []);
-console.log(news)
+
 
   return (
     <Paper >
@@ -44,12 +44,12 @@ console.log(news)
           <Grid  sx={{
       display:'flex',
       justifyContent:'center',
-      alignItems:'center',
+      alignItems:'start',
       marginBottom:'1rem'
     }} container md={9} xs={12} spacing={3}>
 
             {blogs.length && blogs?.map((blog) => (
-              <Grid item>
+              <Grid item key={blog.id}>
                 <BlogCard blog={blog} key={blog.id}  />
               </Grid>
             ))}

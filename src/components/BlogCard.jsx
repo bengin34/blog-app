@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import useBlogCall from "../hooks/useBlogCall";
 import { useParams } from "react-router-dom";
 import ShareLinks from "./ShareLinks";
+import { useState } from "react";
 
 export const BlogCard = ({ blog }) => {
   const navigate = useNavigate()
@@ -24,7 +25,7 @@ export const BlogCard = ({ blog }) => {
   const {id} = useParams()
   
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -35,7 +36,7 @@ export const BlogCard = ({ blog }) => {
     setAnchorEl(null);
   };
 
-  console.log(blog)
+
 
 
 
@@ -56,7 +57,7 @@ export const BlogCard = ({ blog }) => {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings"  onClick={handleClick}>
+          <IconButton aria-label="settings" >
             <MoreVertIcon />
           
           </IconButton>
@@ -91,7 +92,7 @@ export const BlogCard = ({ blog }) => {
           <ForumIcon color="info" />
           <Typography>{blog.comment_count}</Typography>
         </IconButton>
-        <Button variant="outlined" onClick={(id) => navigate(`/blogs/${blog.id}`)} >Read More</Button>
+        <Button variant="outlined" onClick={() => navigate(`/blogs/${blog.id}`)} >Read More</Button>
       </CardActions>
     </Card>
   );
