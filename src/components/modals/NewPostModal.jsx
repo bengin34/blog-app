@@ -65,16 +65,6 @@ const NewPostModal = ({ open, handleClose, blogs }) => {
               onChange={handleChange}
               required
             />
-            {/* <TextField
-              label="posts"
-              name="posts"
-              id="posts"
-              type="number"
-              variant="outlined"
-              onChange={handleChange}
-              required
-            /> */}
-
             <Button variant="contained" type="submit">
               Add Comment
             </Button>

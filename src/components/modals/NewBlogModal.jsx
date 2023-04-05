@@ -2,41 +2,57 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
-import { Typography } from "@mui/material";
-import { useState } from "react";
+import { FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import useBlogCall from "../../hooks/useBlogCall";
 import { modalStyle } from "../../styles/globalStyles";
+import { useSelector } from "react-redux";
 
-
-export default function NewBlogModal({ open, onClose, handleClose }) {
-const [blog,setBlog] = useState({
-    title:"",
-    content:"",
-    image:"",
+export default function NewBlogModal({ open, onClose, handleClose, blogs }) {
+  const { categories } = useSelector((state) => state.blog);
+  const [blog, setBlog] = useState({
+    title: "",
+    content: "",
+    image: "",
     category: "",
-    status:"p",
-})
-const {postBlogData} = useBlogCall()
+    status: "p",
+  });
+  const { postBlogData, editBlogData, getBlogData } = useBlogCall();
 
-const handleSubmit = (e) => {
-    e.preventDefault()
-    postBlogData("blogs",blog)
-    handleClose()
+  useEffect(() => {
+    getBlogData("categories");
+    if (blogs?.id) {
+      setBlog(blogs);
+    }
+  }, [blogs]);
+  console.log(categories);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (blogs?.id) {
+      editBlogData("blogs", blog);
+    } else {
+      postBlogData("blogs", blog);
+    }
+    handleClose();
     setBlog({
-        title:"",
-        content:"",
-        image:"",
-        category: "",
-        status:"p",
-        slug:"string"
-    })
-}
-
-  const handleChange = (e) => {
-    const {name,value} = e.target
-    setBlog({...blog, [name]: value})
+      title: "",
+      content: "",
+      image: "",
+      category: "",
+      status: "p",
+      slug: "string",
+    });
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "category") {
+      setBlog({ ...blog, [name]: value });
+    } else {
+      setBlog({ ...blog, [name]: value });
+    }
+    // setBlog({ ...blog, [name]: value });
+  };
 
   return (
     <div>
@@ -65,6 +81,7 @@ const handleSubmit = (e) => {
               id="title"
               type="text"
               variant="outlined"
+              value={blog?.title || ""}
               onChange={handleChange}
               required
             />
@@ -75,7 +92,9 @@ const handleSubmit = (e) => {
               id="content"
               type="text"
               variant="outlined"
+              value={blog?.content || ""}
               onChange={handleChange}
+              rows={5}
               required
             />
             <TextField
@@ -84,17 +103,34 @@ const handleSubmit = (e) => {
               id="image"
               type="text"
               variant="outlined"
+              value={blog?.image || ""}
               onChange={handleChange}
             />
-            <TextField
+            {/* <TextField
               label="Category"
               name="category"
               id="category"
               type="number"
               variant="outlined"
+              value={blog?.category ||""}
               onChange={handleChange}
-            />            
-            <Button variant="contained" type="submit" >Save Post</Button>
+            />             */}
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Categories</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                
+                onChange={handleChange}
+              >
+              {categories.map((item) => (
+                <MenuItem value={item.id}>{item.name}</MenuItem>
+              ))}
+              </Select>
+            </FormControl>
+            <Button variant="contained" type="submit">
+              Save Post
+            </Button>
           </Box>
         </Box>
       </Modal>

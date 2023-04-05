@@ -15,7 +15,7 @@ export default function Categories() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const { deleteBlogData, editBlogData } = useBlogCall();
+  const { deleteBlogData } = useBlogCall();
   const [category, setCategory] = useState({
     name: "",
   });

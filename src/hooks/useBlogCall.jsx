@@ -81,6 +81,7 @@ const useBlogCall = () => {
     try {
       await axiosWithToken.put(`api/${url}/${blog.id}/`, blog);
       toastSuccessNotify(`${url} successfuly updated`);
+      readBlogData("blogs",blog.id)
       getBlogData(url);
     } catch (error) {
       console.log(error);
