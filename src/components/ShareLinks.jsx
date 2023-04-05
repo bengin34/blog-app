@@ -9,7 +9,7 @@ import  Instagram  from "@mui/icons-material/Instagram";
 import Box from '@mui/material/Box'
 
 const ShareLinks = ({ blog }) => {
-  const shareUrl = `https://example.com/blog/${blog.id}`;
+  const shareUrl = `https://django-redux-blog-app.vercel.app/blogs/${blog.id}`;
   const shareTitle = blog.title;
 
   const instagramShareUrl = `https://www.instagram.com/sharer.php?u=${shareUrl}`;

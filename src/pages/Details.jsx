@@ -66,25 +66,46 @@ const Detail = () => {
             >
               {" "}
               <Box>
-                <Typography variant="h3" sx={{ display: "block" }}>
-                  {blogs?.title}
-                </Typography>
-                <Typography marginTop={2} variant="h6">
-                  {blogs?.content}
-                </Typography>
-                <Typography
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  marginTop={2}
-                  variant="p"
-                  marginBottom={5}
-                >
-                  Written by: {blogs?.author} Created Date:{" "}
-                  {blogs?.publish_date?.slice(0, 10)}{" "}
-                </Typography>
+              <Typography
+  variant="h3"
+  sx={{
+    display: "flex",
+    justifyContent: "center",
+    "@media (max-width: 600px)": {
+      fontSize: "2rem"
+    }
+  }}
+>
+  {blogs?.title}
+</Typography>
+<Typography
+  marginTop={2}
+  variant="h6"
+  sx={{
+    "@media (max-width: 600px)": {
+      fontSize: "1.1rem"
+    }
+  }}
+>
+  {blogs?.content}
+</Typography>
+<Typography
+  sx={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    "@media (max-width: 600px)": {
+      fontSize: "0.8rem"
+    }
+  }}
+  marginTop={2}
+  variant="p"
+  marginBottom={5}
+>
+  Written by: {blogs?.author} Created Date:{" "}
+  {blogs?.publish_date?.slice(0, 10)}{" "}
+</Typography>
+
                 <Box
                   sx={{
                     display: "flex",
