@@ -28,7 +28,7 @@ App enables to user to add posts and comments.
 
 ## API Reference
 
-https://newsapi.org/
+https://newsapi.org/ <br>
 https://fullstack.clarusway.com/
 
 ## How to use?
