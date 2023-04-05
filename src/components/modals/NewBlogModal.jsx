@@ -47,7 +47,7 @@ export default function NewBlogModal({ open, onClose, handleClose, blogs }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "category") {
-      setBlog({ ...blog, [name]: value });
+      setBlog({ ...blog, category: value });
     } else {
       setBlog({ ...blog, [name]: value });
     }
