@@ -23,7 +23,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getBlogData("blogs");
-    // getNewsData();
+    getNewsData();
   }, []);
 
 

@@ -25,7 +25,7 @@ export default function NewBlogModal({ open, onClose, handleClose, blogs }) {
       setBlog(blogs);
     }
   }, [blogs]);
-  console.log(categories);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (blogs?.id) {
