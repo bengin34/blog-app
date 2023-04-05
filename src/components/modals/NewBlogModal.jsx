@@ -106,21 +106,12 @@ export default function NewBlogModal({ open, onClose, handleClose, blogs }) {
               value={blog?.image || ""}
               onChange={handleChange}
             />
-            {/* <TextField
-              label="Category"
-              name="category"
-              id="category"
-              type="number"
-              variant="outlined"
-              value={blog?.category ||""}
-              onChange={handleChange}
-            />             */}
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Categories</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                
+                name="category"
                 onChange={handleChange}
               >
               {categories.map((item) => (
