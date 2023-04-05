@@ -53,7 +53,7 @@ const handleSubmit = (e) => {
           <Box
             sx={{
               display: "flex",
-              flexDirection: { xs: "column-reverse", md: "column" },
+              flexDirection: "column",
               gap: 2,
             }}
             component="form"
