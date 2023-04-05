@@ -16,13 +16,24 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { useNavigate } from "react-router-dom";
 import useBlogCall from "../hooks/useBlogCall";
 import { useParams } from "react-router-dom";
-
+import ShareLinks from "./ShareLinks";
 
 export const BlogCard = ({ blog }) => {
   const navigate = useNavigate()
   const {postLike} = useBlogCall()
   const {id} = useParams()
   
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   console.log(blog)
 
@@ -41,17 +52,20 @@ export const BlogCard = ({ blog }) => {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            {blog.author.slice(0, 3)}
+            {blog.author.slice(0, 2)}
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
+          <IconButton aria-label="settings"  onClick={handleClick}>
             <MoreVertIcon />
+          
           </IconButton>
         }
-        title={blog.title}
+        title={blog.title.slice(0,50)}
         subheader={blog.publish_date.slice(0, 10)}
+        
       />
+      <ShareLinks open={open} blog={blog} onClose={handleClose}/>
       <CardMedia
         component="img"
         height="200"

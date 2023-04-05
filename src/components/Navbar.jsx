@@ -11,9 +11,8 @@ import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
-import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
-
+import { useState } from "react";
 const pages = [
   {
     title: "Dashboard",
@@ -33,8 +32,8 @@ const settings = [
   ];
 
 const Navbar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 const navigate = useNavigate()
 
   const handleOpenNavMenu = (event) => {
@@ -112,6 +111,7 @@ const navigate = useNavigate()
               color: "inherit",
               textDecoration: "none",
             }}
+            onClick={() => navigate ('/dashboard')}
           >
             Tech Blog
           </Typography>
