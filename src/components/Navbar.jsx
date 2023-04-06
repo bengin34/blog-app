@@ -14,6 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useAuthCall from "../hooks/useAuthCall";
+import { useSelector } from "react-redux";
 
 const pages = [
   {
@@ -24,21 +25,23 @@ const pages = [
     title: "Categories",
     url: "/categories",
   },
-
 ];
 const settings = [
   {
     title: "Logout",
     url: "/",
   },
-  ];
+];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-const navigate = useNavigate()
-const { logout} = useAuthCall()
 
+  const navigate = useNavigate();
+  const { logout } = useAuthCall();
+
+  const { currentUser } = useSelector((state) => state.auth);
+  const { image } = useSelector((state) => state.auth);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -52,14 +55,14 @@ const { logout} = useAuthCall()
   };
 
   const handleCloseUserMenu = () => {
-    logout()
+    logout();
     setAnchorElUser(null);
   };
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters= {true}>
+        <Toolbar disableGutters={true}>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -89,8 +92,8 @@ const { logout} = useAuthCall()
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page,index) => (
-                <MenuItem key={index} onClick={() => (handleCloseNavMenu())}>
+              {pages.map((page, index) => (
+                <MenuItem key={index} onClick={() => handleCloseNavMenu()}>
                   <Typography textAlign="center">{page.title}</Typography>
                 </MenuItem>
               ))}
@@ -112,15 +115,15 @@ const { logout} = useAuthCall()
               color: "inherit",
               textDecoration: "none",
             }}
-            onClick={() => navigate ('/dashboard')}
+            onClick={() => navigate("/dashboard")}
           >
             Tech Blog
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page,index) => (
+            {pages.map((page, index) => (
               <Button
                 key={index}
-                onClick={() => (navigate(page.url),handleCloseNavMenu())}
+                onClick={() => (navigate(page.url), handleCloseNavMenu())}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page.title}
@@ -131,7 +134,7 @@ const { logout} = useAuthCall()
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={currentUser?.name} src={image} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -150,8 +153,8 @@ const { logout} = useAuthCall()
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting,index) => (
-                <MenuItem key={index} onClick={() => (handleCloseUserMenu())}>
+              {settings.map((setting, index) => (
+                <MenuItem key={index} onClick={() => handleCloseUserMenu()}>
                   <Typography textAlign="center">{setting.title}</Typography>
                 </MenuItem>
               ))}
