@@ -23,7 +23,6 @@ const useAuthCall = () => {
             dispatch(loginSuccess(data))
             toastSuccessNotify("Login performed")
             navigate("/dashboard")
-            console.log(data)
         } catch (error) {
             dispatch(fetchFail())
             toastErrorNotify("Login can not be performed")
@@ -47,7 +46,7 @@ const useAuthCall = () => {
         dispatch(fetchStart())
         try {
             const {data} = await axios.post(`${BASE_URL}users/register/`,userInfo)
-            dispatch(loginSuccess(data))
+            dispatch(registerSuccess(data))
             toastSuccessNotify("Register performed")
             navigate("/dashboard")
             console.log(data)

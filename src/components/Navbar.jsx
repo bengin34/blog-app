@@ -13,6 +13,8 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import useAuthCall from "../hooks/useAuthCall";
+
 const pages = [
   {
     title: "Dashboard",
@@ -35,6 +37,8 @@ const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 const navigate = useNavigate()
+const { logout} = useAuthCall()
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -45,14 +49,11 @@ const navigate = useNavigate()
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-    
   };
 
   const handleCloseUserMenu = () => {
+    logout()
     setAnchorElUser(null);
-
-    
-
   };
 
   return (
@@ -89,7 +90,7 @@ const navigate = useNavigate()
               }}
             >
               {pages.map((page,index) => (
-                <MenuItem key={index} onClick={() => (navigate(page.url),handleCloseNavMenu())}>
+                <MenuItem key={index} onClick={() => (handleCloseNavMenu())}>
                   <Typography textAlign="center">{page.title}</Typography>
                 </MenuItem>
               ))}
@@ -150,7 +151,7 @@ const navigate = useNavigate()
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting,index) => (
-                <MenuItem key={index} onClick={() => (navigate(setting.url),handleCloseUserMenu())}>
+                <MenuItem key={index} onClick={() => (handleCloseUserMenu())}>
                   <Typography textAlign="center">{setting.title}</Typography>
                 </MenuItem>
               ))}

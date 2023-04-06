@@ -9,12 +9,12 @@ import Grid from "@mui/material/Grid";
 import RegisterForm, { registerSchema } from "../components/auth/RegisterForm";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 import useAuthCall from "../hooks/useAuthCall";
 
 const Register = () => {
   const {register} = useAuthCall()
-  
+  const navigate = useNavigate()
   return (
     <Container maxWidth='lg'>
       <Grid
@@ -58,12 +58,10 @@ const Register = () => {
               bio: "",
               password: "",
             }}
-
             validationSchema={registerSchema}
             
-
             onSubmit={(values, actions) => {
-              register({...values, password2: values.password});
+              register({...values, password2: values.password})
               actions.resetForm();
               actions.setSubmitting(false);
             }}
