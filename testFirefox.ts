@@ -165,16 +165,46 @@ function floor(a: number): number {
 }
 
 
+/**
+* @description The function `ceiling(a)` takes a number `a` as input and returns its 
+* ceiling (i.e., the smallest integer greater than or equal to `a`).
+* 
+* @param { number } a - In the provided function `ceiling`, the input parameter `a` 
+* is a number that is passed to the `Math.ceil()` method to be rounded up to the 
+* nearest integer.
+* 
+* @returns { number } The output returned by the function `ceiling(a)` is the result 
+* of rounding the number `a` up to the nearest integer using the `Math.ceil()` method.
+*/
 function ceiling(a: number): number {
     return Math.ceil(a);
 }
 
 
+/**
+* @description The given function is named `log` and it takes a single argument `a` 
+* of type `number`.
+* 
+* @param { number } a - The `a` input parameter is passed to the `Math.log()` function 
+* inside the `log()` function.
+* 
+* @returns { number } The output returned by this function is `Math.log(a)`.
+*/
 function log(a: number): number {
     return Math.log(a);
 }
 
 
+/**
+* @description This function takes a single argument `a` of type `number` and returns 
+* the sine of `a`.
+* 
+* @param { number } a - The `a` input parameter passed to the `sin()` function is a 
+* numeric value that is used as the angle to be sinned.
+* 
+* @returns { number } The output returned by this function is "NaN" (Not a Number), 
+* because the parameter "a" is undefined.
+*/
 function sin(a: number): number {
     return Math.sin(a);
 }
