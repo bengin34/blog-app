@@ -165,16 +165,46 @@ function floor(a: number): number {
 }
 
 
+/**
+* @description This function takes a single argument `a`, which is a number.
+* 
+* @param { number } a - The `a` input parameter is passed by value and serves as the 
+* value that the `Math.ceil()` function rounds to the nearest integer.
+* 
+* @returns { number } The output returned by the function `ceiling` with the argument 
+* `a = 2.5` is `3`.
+*/
 function ceiling(a: number): number {
     return Math.ceil(a);
 }
 
 
+/**
+* @description This function takes a single argument `a` of type number and returns 
+* its natural logarithm (base e) using the Math.log() function.
+* 
+* @param { number } a - The `a` input parameter is the number for which the logarithm 
+* will be calculated.
+* 
+* @returns { number } The output returned by this function is `Math.log(a)`, which 
+* is the natural logarithm of the given number `a`.
+*/
 function log(a: number): number {
     return Math.log(a);
 }
 
 
+/**
+* @description This function takes a single argument `a` of type `number`, and returns 
+* the sine of that value using the `Math.sin()` method.
+* 
+* @param { number } a - The `a` input parameter is passed as an argument to the 
+* `Math.sin()` method and represents the angle (in radians) for which the sine 
+* function should be computed.
+* 
+* @returns { number } The output returned by the function `sin(a)` is the sine of 
+* the given number `a`.
+*/
 function sin(a: number): number {
     return Math.sin(a);
 }
