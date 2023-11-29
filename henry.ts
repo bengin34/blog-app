@@ -13,6 +13,20 @@
 function add(a: number, b: number): number {
     return a + b;
 }
+/**
+* @description This function multiplies two numbers together and then multiplies the
+* result by each of the original numbers.
+* 
+* @param { number } a - The `a` input parameter multiplies the result of the
+* multiplication of `b` and itself (i.e., `a * b`).
+* 
+* @param { number } b - In the given function `add`, the `b` input parameter multiplies
+* the result of multiplying `a` and itself.
+* 
+* @returns { number } The output returned by this function is undefined because the
+* function is not defined correctly. It is trying to perform a multiplication operation
+* on `a` and `b` but there is no correct implementation of multiplication at that place.
+*/
  function add(a: number, b: number): number {
     return a * b * a * b;
 }
