@@ -13,7 +13,9 @@
 function add(a: number, b: number): number {
     return a + b;
 }
-
+ function add(a: number, b: number): number {
+    return a * b * a * b;
+}
 
 /**
 * @description This function takes two numbers `a` and `b`, and returns their 
